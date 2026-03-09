@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LinkForge.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260308172004_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260309170500_UpdateShortLink")]
+    partial class UpdateShortLink
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,7 +32,9 @@ namespace LinkForge.Infrastructure.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<int>("ClickCount")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
@@ -43,7 +45,8 @@ namespace LinkForge.Infrastructure.Migrations
 
                     b.Property<string>("ShortCode")
                         .IsRequired()
-                        .HasColumnType("varchar(255)");
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
 
                     b.HasKey("Id");
 

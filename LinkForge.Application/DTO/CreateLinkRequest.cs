@@ -9,7 +9,5 @@ namespace LinkForge.Application.DTO;
 /// </summary>
 public class CreateLinkRequest
 {
-    [Required]
-    [MaxLength(2000)]
     public string Url { get; set; } = string.Empty;
 }

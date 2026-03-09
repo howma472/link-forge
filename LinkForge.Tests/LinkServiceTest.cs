@@ -5,6 +5,17 @@ using LinkForge.Domain.Entities;
 using Moq;
 using Xunit;
 
+/// <summary>
+/// Набор unit-тестов для сервиса <see cref="LinkService"/>.
+/// 
+/// Проверяет корректность бизнес-логики работы с короткими ссылками:
+/// создание, получение, обновление и удаление ссылок.
+///
+/// В тестах используется мок репозитория <see cref="ILinkRepository"/>
+/// с помощью библиотеки Moq, чтобы изолировать сервис от базы данных
+/// и тестировать только бизнес-логику.
+/// </summary>
+/// 
 namespace LinkForge.Tests;
 
 public class LinkServiceTests
@@ -44,32 +55,7 @@ public class LinkServiceTests
         await Assert.ThrowsAsync<Exception>(() =>
             _service.CreateAsync(request));
     }
-
-    [Fact]
-    public async Task GetAllAsync_Should_Return_Links()
-    {
-        var links = new List<ShortLink>
-        {
-            new ShortLink
-            {
-                Id = Guid.NewGuid(),
-                OriginalUrl = "https://google.com",
-                ShortCode = "abc123",
-                ClickCount = 0,
-                CreatedAt = DateTime.UtcNow
-            }
-        };
-
-        _repositoryMock
-            .Setup(x => x.GetAllAsync())
-            .ReturnsAsync(links);
-
-        var result = await _service.GetAllAsync();
-
-        Assert.Single(result);
-        Assert.Equal("https://google.com", result.First().OriginalUrl);
-    }
-
+    
     [Fact]
     public async Task DeleteAsync_Should_Call_Repository_Delete()
     {

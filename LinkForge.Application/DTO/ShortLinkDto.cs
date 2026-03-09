@@ -1,13 +1,14 @@
-using System.ComponentModel.DataAnnotations;
+namespace LinkForge.Application.DTO;
 
-namespace LinkForge.Domain.Entities;
-
-public class ShortLink
+public class ShortLinkDto
 {
     public Guid Id { get; set; }
+
     public string OriginalUrl { get; set; } = string.Empty;
+
     public string ShortCode { get; set; } = string.Empty;
+
     public DateTime CreatedAt { get; set; }
-    public int ClickCount { get; set; } = 0;
     
+    public int ClickCount { get; set; }
 }

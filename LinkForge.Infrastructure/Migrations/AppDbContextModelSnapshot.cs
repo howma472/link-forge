@@ -29,7 +29,9 @@ namespace LinkForge.Infrastructure.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<int>("ClickCount")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
@@ -40,7 +42,8 @@ namespace LinkForge.Infrastructure.Migrations
 
                     b.Property<string>("ShortCode")
                         .IsRequired()
-                        .HasColumnType("varchar(255)");
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
 
                     b.HasKey("Id");
 

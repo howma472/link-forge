@@ -1,23 +1,25 @@
-using System.Security.Cryptography;
-using System.Text;
-
 namespace LinkForge.Application.Generators;
+
 /// <summary>
-/// Генератор коротких кодов (short codes) фиксированной длины на основе криптографически стойкого случайного генератора.
+/// Генератор коротких кодов на основе GUID.
 /// </summary>
 public static class ShortCodeGenerator
 {
-    
-    private const string Alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private const string Alphabet = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
     public static string Generate(int length = 7)
     {
-        var bytes = RandomNumberGenerator.GetBytes(length);
-        var result = new StringBuilder(length);
-        foreach (var b in bytes)
+        var guidBytes = Guid.NewGuid().ToByteArray();
+        var number = BitConverter.ToUInt64(guidBytes, 0);
+
+        var chars = new char[length];
+
+        for (int i = 0; i < length; i++)
         {
-            var index = b % Alphabet.Length;
-            result.Append(Alphabet[index]);
+            chars[i] = Alphabet[(int)(number % (ulong)Alphabet.Length)];
+            number /= (ulong)Alphabet.Length;
         }
-        return result.ToString();
+
+        return new string(chars);
     }
 }
