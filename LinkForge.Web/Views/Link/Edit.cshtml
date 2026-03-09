@@ -1,0 +1,41 @@
+@model LinkForge.Domain.Entities.ShortLink
+
+<h2 class="mb-4">Edit link</h2>
+
+<form asp-action="Edit" method="post" class="card p-4">
+
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <div class="mb-3">
+        <label class="form-label">Original URL</label>
+        <input name="OriginalUrl"
+               value="@Model.OriginalUrl"
+               class="form-control"
+               required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Short code</label>
+        <input value="@Model.ShortCode"
+               class="form-control"
+               readonly />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Created</label>
+        <input value="@Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")"
+               class="form-control"
+               readonly />
+    </div>
+
+    <button class="btn btn-primary">
+        Save
+    </button>
+
+</form>
+
+<br/>
+
+<a asp-action="Index" class="btn btn-secondary">
+    Back
+</a>

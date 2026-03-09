@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkForge.Web", "LinkForge.Web\LinkForge.Web.csproj", "{4F83B362-2109-4EFD-929F-64716B6D101A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkForge.Application", "LinkForge.Application\LinkForge.Application.csproj", "{7C20CAB8-F67F-4240-B828-DED9C938819B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkForge.Domain", "LinkForge.Domain\LinkForge.Domain.csproj", "{AC5D2EEA-C441-4775-8FA5-DC456AD953DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkForge.Infrastructure", "LinkForge.Infrastructure\LinkForge.Infrastructure.csproj", "{E53E5B37-25DC-4716-8F4E-AA0047F900A8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5CCD0FF9-7A9B-407B-9C58-38D506F94311}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkForge.Tests", "LinkForge.Tests\LinkForge.Tests.csproj", "{3CE9063B-13CB-4944-BB56-616B45A99426}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F83B362-2109-4EFD-929F-64716B6D101A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F83B362-2109-4EFD-929F-64716B6D101A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F83B362-2109-4EFD-929F-64716B6D101A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F83B362-2109-4EFD-929F-64716B6D101A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C20CAB8-F67F-4240-B828-DED9C938819B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C20CAB8-F67F-4240-B828-DED9C938819B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C20CAB8-F67F-4240-B828-DED9C938819B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C20CAB8-F67F-4240-B828-DED9C938819B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC5D2EEA-C441-4775-8FA5-DC456AD953DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC5D2EEA-C441-4775-8FA5-DC456AD953DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC5D2EEA-C441-4775-8FA5-DC456AD953DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC5D2EEA-C441-4775-8FA5-DC456AD953DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E53E5B37-25DC-4716-8F4E-AA0047F900A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E53E5B37-25DC-4716-8F4E-AA0047F900A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E53E5B37-25DC-4716-8F4E-AA0047F900A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E53E5B37-25DC-4716-8F4E-AA0047F900A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CE9063B-13CB-4944-BB56-616B45A99426}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CE9063B-13CB-4944-BB56-616B45A99426}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CE9063B-13CB-4944-BB56-616B45A99426}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CE9063B-13CB-4944-BB56-616B45A99426}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
