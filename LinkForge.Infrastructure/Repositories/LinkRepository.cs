@@ -4,13 +4,7 @@ using LinkForge.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace LinkForge.Infrastructure.Repositories;
-/// <summary>
-/// Реализация <see cref="ILinkRepository"/> на основе EF Core.
-///
-/// Репозиторий изолирует слой Application от конкретной реализации
-/// хранения данных (EF Core / база данных).
-/// Это позволяет менять механизм хранения без изменения бизнес-логики.
-/// </summary>
+
 public class LinkRepository : ILinkRepository
 {
     private readonly AppDbContext _context;
@@ -34,11 +28,6 @@ public class LinkRepository : ILinkRepository
     /// <summary>
     /// Получает короткую ссылку по её короткому коду.
     /// </summary>
-    /// <remarks>
-    /// Используется при обработке редиректа,
-    /// когда необходимо определить оригинальный URL
-    /// по короткому коду из запроса.
-    /// </remarks>
     public async Task<ShortLink?> GetByCodeAsync(string code)
     {
         return await _context.Links.FirstOrDefaultAsync(x => x.ShortCode == code);
@@ -46,11 +35,6 @@ public class LinkRepository : ILinkRepository
     /// <summary>
     /// Добавляет новую короткую ссылку в хранилище.
     /// </summary>
-    /// <remarks>
-    /// После добавления сущность начинает отслеживаться EF Core.
-    /// Вызов <see cref="DbContext.SaveChangesAsync"/> фиксирует изменения
-    /// в базе данных в рамках текущей операции.
-    /// </remarks>
     public async Task AddAsync(ShortLink link)
     {
         await _context.Links.AddAsync(link);

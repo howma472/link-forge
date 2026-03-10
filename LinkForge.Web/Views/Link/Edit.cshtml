@@ -1,41 +1,62 @@
 @model LinkForge.Application.DTO.ShortLinkDto
 
-<h2 class="mb-4">Edit link</h2>
+<div class="card shadow-sm">
 
-<form asp-action="Edit" method="post" class="card p-4">
+    <div class="card-body">
 
-    <input type="hidden" name="Id" value="@Model.Id" />
+        <h4>Edit link</h4>
 
-    <div class="mb-3">
-        <label class="form-label">Original URL</label>
-        <input name="OriginalUrl"
-               value="@Model.OriginalUrl"
-               class="form-control"
-               required />
+        <form asp-action="Edit" method="post">
+
+            <input type="hidden" name="Id" value="@Model.Id"/>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Original URL
+                </label>
+
+                <input name="OriginalUrl"
+                       value="@Model.OriginalUrl"
+                       class="form-control"/>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Short Code
+                </label>
+
+                <input value="@Model.ShortCode"
+                       class="form-control"
+                       readonly/>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Created
+                </label>
+
+                <input value="@Model.CreatedAt.ToString("dd.MM.yyyy HH:mm")"
+                       class="form-control"
+                       readonly/>
+
+            </div>
+
+            <button class="btn btn-primary">
+                Save
+            </button>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+                Back
+            </a>
+
+        </form>
+
     </div>
 
-    <div class="mb-3">
-        <label class="form-label">Short code</label>
-        <input value="@Model.ShortCode"
-               class="form-control"
-               readonly />
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Created</label>
-        <input value="@Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")"
-               class="form-control"
-               readonly />
-    </div>
-
-    <button class="btn btn-primary">
-        Save
-    </button>
-
-</form>
-
-<br/>
-
-<a asp-action="Index" class="btn btn-secondary">
-    Back
-</a>
+</div>

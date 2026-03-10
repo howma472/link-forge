@@ -27,4 +27,10 @@
       </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\js\create.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\js\edit.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\js\links.js" />
+    </ItemGroup>
+
 </Project>

@@ -8,7 +8,7 @@ services:
     restart: always
 
     environment:
-      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: YOUR_PASSWORD
       MYSQL_DATABASE: linkforge
 
     ports:

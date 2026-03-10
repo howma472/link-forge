@@ -1,3 +1,4 @@
+using AutoMapper;
 using LinkForge.Application.DTO;
 using LinkForge.Application.Interfaces;
 using LinkForge.Application.Services;
@@ -6,33 +7,33 @@ using Moq;
 using Xunit;
 
 /// <summary>
-/// Набор unit-тестов для сервиса <see cref="LinkService"/>.
-/// 
+/// Набор unit-тестов 
 /// Проверяет корректность бизнес-логики работы с короткими ссылками:
 /// создание, получение, обновление и удаление ссылок.
-///
-/// В тестах используется мок репозитория <see cref="ILinkRepository"/>
-/// с помощью библиотеки Moq, чтобы изолировать сервис от базы данных
-/// и тестировать только бизнес-логику.
 /// </summary>
-/// 
 namespace LinkForge.Tests;
 
 public class LinkServiceTests
 {
     private readonly Mock<ILinkRepository> _repositoryMock;
+    private readonly Mock<IMapper> _mapperMock;
     private readonly LinkService _service;
 
     public LinkServiceTests()
     {
         _repositoryMock = new Mock<ILinkRepository>();
-        _service = new LinkService(_repositoryMock.Object);
+        _mapperMock = new Mock<IMapper>();
+
+        _service = new LinkService(
+            _repositoryMock.Object,
+            _mapperMock.Object
+        );
     }
 
     [Fact]
     public async Task CreateAsync_Should_Add_Link()
     {
-        var request = new CreateLinkRequest
+        var request = new CreateLinkRequestDto
         {
             Url = "https://google.com"
         };
@@ -47,7 +48,7 @@ public class LinkServiceTests
     [Fact]
     public async Task CreateAsync_Should_Throw_Exception_For_Invalid_Url()
     {
-        var request = new CreateLinkRequest
+        var request = new CreateLinkRequestDto
         {
             Url = "invalid-url"
         };
@@ -71,7 +72,7 @@ public class LinkServiceTests
     [Fact]
     public async Task UpdateAsync_Should_Update_Link()
     {
-        var request = new UpdateLinkRequest
+        var request = new UpdateLinkRequestDto
         {
             Id = Guid.NewGuid(),
             OriginalUrl = "https://youtube.com"

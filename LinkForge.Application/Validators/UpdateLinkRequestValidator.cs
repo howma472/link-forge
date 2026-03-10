@@ -3,7 +3,7 @@ using LinkForge.Application.DTO;
 
 namespace LinkForge.Application.Validators;
 
-public class UpdateLinkRequestValidator : AbstractValidator<UpdateLinkRequest>
+public class UpdateLinkRequestValidator : AbstractValidator<UpdateLinkRequestDto>
 {
     public UpdateLinkRequestValidator()
     {
@@ -12,7 +12,11 @@ public class UpdateLinkRequestValidator : AbstractValidator<UpdateLinkRequest>
 
         RuleFor(x => x.OriginalUrl)
             .NotEmpty()
-            .Must(url => Uri.TryCreate(url, UriKind.Absolute, out _))
+            .MinimumLength(5)
+            .MaximumLength(2000);
+
+        RuleFor(x => x.OriginalUrl)
+            .Must(url => Uri.IsWellFormedUriString(url, UriKind.Absolute))
             .WithMessage("Invalid URL format");
     }
 }

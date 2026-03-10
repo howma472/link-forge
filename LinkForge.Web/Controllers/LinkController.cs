@@ -1,5 +1,4 @@
 using LinkForge.Application.DTO;
-using LinkForge.Application.Queries;
 using LinkForge.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,23 +6,16 @@ namespace LinkForge.Web.Controllers;
 
 public class LinkController : Controller
 {
-    private readonly GetAllLinksQuery _getAllQuery;
-    private readonly GetLinkByIdQuery _getByIdQuery;
     private readonly LinkService _service;
 
-    public LinkController(
-        GetAllLinksQuery getAllQuery,
-        GetLinkByIdQuery getByIdQuery,
-        LinkService service)
+    public LinkController(LinkService service)
     {
-        _getAllQuery = getAllQuery;
-        _getByIdQuery = getByIdQuery;
         _service = service;
     }
 
     public async Task<IActionResult> Index()
     {
-        var links = await _getAllQuery.ExecuteAsync();
+        var links = await _service.GetAllAsync();
         return View(links);
     }
 
@@ -34,23 +26,41 @@ public class LinkController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateLinkRequest request)
+    public async Task<IActionResult> Create(CreateLinkRequestDto requestDto)
     {
         if (!ModelState.IsValid)
-            return View(request);
+            return View(requestDto);
 
-        await _service.CreateAsync(request);
+        await _service.CreateAsync(requestDto);
 
         return RedirectToAction(nameof(Index));
     }
 
+    [HttpGet]
     public async Task<IActionResult> Edit(Guid id)
     {
-        var link = await _getByIdQuery.ExecuteAsync(id);
+        var link = await _service.GetByIdAsync(id);
 
         if (link == null)
             return NotFound();
 
         return View(link);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(UpdateLinkRequestDto dto)
+    {
+        if (!ModelState.IsValid)
+            return View(dto);
+
+        await _service.UpdateAsync(dto);
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        await _service.DeleteAsync(id);
+        return RedirectToAction(nameof(Index));
     }
 }

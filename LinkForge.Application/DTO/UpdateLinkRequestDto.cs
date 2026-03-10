@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LinkForge.Application.DTO;
 
-public class UpdateLinkRequest
+public class UpdateLinkRequestDto
 {
     
     public Guid Id { get; set; }

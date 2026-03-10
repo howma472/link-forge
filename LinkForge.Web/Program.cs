@@ -4,10 +4,10 @@ using LinkForge.Infrastructure.Data;
 using LinkForge.Infrastructure.Repositories;
 using LinkForge.Application.Interfaces;
 using LinkForge.Application.Mappings;
-using LinkForge.Application.Queries;
 using LinkForge.Application.Services;
 using LinkForge.Application.Validators;
 using LinkForge.Domain.Entities;
+using LinkForge.Web.Middleware;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,21 +20,18 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<ILinkRepository, LinkRepository>();
 builder.Services.AddScoped<LinkService>();
 builder.Services.AddAutoMapper(typeof(ShortLinkProfile).Assembly);
-builder.Services.AddScoped<GetAllLinksQuery>();
-builder.Services.AddScoped<GetLinkByIdQuery>();
-builder.Services.AddScoped<GetLinkByCodeQuery>();
-builder.Services.AddControllersWithViews().AddFluentValidation();
+
+builder.Services.AddControllersWithViews();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateLinkRequestValidator>();
 
 var app = builder.Build();
+app.UseGlobalExceptionMiddleware();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
 }
-
 app.UseStaticFiles();
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Link}/{action=Index}/{id?}");

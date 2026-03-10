@@ -9,5 +9,4 @@ public class ShortLink
     public string ShortCode { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; }
     public int ClickCount { get; set; } = 0;
-    
 }
